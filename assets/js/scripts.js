@@ -36,10 +36,6 @@ var timerId;
 var startBtn = document.getElementById('start-btn');
 var choicesEl = document.getElementById('qcode-choices');
 var submitBtn = document.getElementById('submit-btn');
-var feed = document.getElementById('feedback');
-var timerEl = document.getElementById('time');
-var initialsEl = document.getElementById('initials');
-var qcodeEl = document.getElementById('qcode-screen');
 
 function  startQuiz() {
 
@@ -48,33 +44,11 @@ function  startQuiz() {
 
     qcodeEl.removeAttribute('class');
 
-    timerId = setInterval(timeMove, 500);
-
-    timerEl.textContent = time;
-
     getQuestr();
 }
 
 function getQcode() {
     var currentQcode = qcode[currentQcodeIndex];
-
-    var titleEl = document.getElementById('question-title');
-    titleEl.textContent = currentQcode.title;
-
-    choicesEl.innerHTML = '';
-
-    currentQcode.choices.forEach(function(choice, i) {
-        var choiceNode = document.createElement('button');
-        choiceNode.setAttribute('class', 'choice');
-        choiceNode.setAttribute('value', choice);
-
-        choiceNode.textContent = i + 1 + '. ' + choice;
-
-        choiceNode.onclick = qcodeClick;
-
-        choicesEl.appendChild(choiceNode);
-    }
-    );
 }
 
 function qcodeClick() {
@@ -96,14 +70,6 @@ function qcodeClick() {
 
 function quizEnd() {
     clearInterval(timerId);
-
-    var endScreenEl = document.getElementById('finalScreen');
-    endScreenEl.removeAttribute('class');
-
-    var finalScoreEl = document.getElementById('final-score');
-    finalScoreEl.textContent = time;
-
-    questionsEl.setAttribute('class', 'hide');
 };
 
 setTimeout(function() {
@@ -135,13 +101,6 @@ function saveScore() {
         var highscores = 
         JSON.parse(window.localStorage.getItem('highscores')) || [];
 
-        var newScore = {
-            score: time,
-            initials: initials
-        };
-        highscores.push(newScore);
-        window.localStorage.setItem('highscores', JSON.stringify(highscores));
-        window.location.href = 'highscores.html';
     }
 }     
 
