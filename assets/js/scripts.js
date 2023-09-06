@@ -44,7 +44,7 @@ function  startQuiz() {
 
     qcodeEl.removeAttribute('class');
 
-    getQuestr();
+    getQcode();
 }
 
 function getQcode() {
